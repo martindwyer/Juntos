@@ -1,0 +1,74 @@
+<!-- begins by extending the group base -->
+{% extends 'groups/group_base.html' %}
+{% load static %}
+
+<!-- block pregroup begins here -->
+{% block pregroup %}
+
+    <div id="page-content" class="container bg-light">
+    <div class="row">
+    <div id="left-stuff" class="col-md-4">
+        <div id="sidebar-logo">
+            <img src="{% static 'images/juntos-name-logo.png' %}" alt="page logo"/>
+        </div>
+        <h5>Group Detail</h5>
+        <hr/>
+        <h6>{{ group.name }}</h6>
+
+        {% if group.group_picture %}
+            <div class="group-pic-detail-page">
+                <img
+
+                        src="/media/{{ group.group_picture }}"
+                        alt="group pic"
+                />
+            </div>
+
+        {% endif %}
+
+        <h6 class="member-count">{{ group.members.count }} members</h6>
+        <h6 class="post-count">{{ group.posts.count }} posts</h6>
+        {% if user in group.members.all %}
+            <a href="{% url 'groups:leave' slug=group.slug %}" class="btn btn-create"
+            >Leave Group&nbsp;&nbsp;<i class="fas fa-times-circle fa-xl"></i></a
+            >
+            <a href="{% url 'groups:update' slug=group.slug %}" class="btn btn-create"
+            >Update Group&nbsp;&nbsp;<i class="fas fa-edit fa-xl"></i></a
+            >
+            <a href="{% url 'groups:delete' slug=group.slug %}" class="btn btn-create"
+            >Delete Group&nbsp;&nbsp;<i class="fas fa-trash-alt fa-xl"></i></a
+            >
+
+        {% else %}
+            <a
+                    href="{% url 'groups:join' slug=group.slug %}"
+                    class="btn btn-create"
+            >Join&nbsp;&nbsp;<i class="fas fa-sign-in-alt"></i></a
+            >
+        {% endif %}
+    </div>
+{% endblock pregroup %}
+<!-- pregroup content block ends here -->
+
+<!-- group_content block begins here -->
+{% block group_content %}
+    <div class="col-md-8">
+        <h2>Posts</h2>
+        <hr/>
+        {% if group.posts.count == 0 %}
+            <br/><br/>
+            <h4>No posts in this group yet</h4>
+        {% else %}
+            <div>
+                {% for post in group.posts.all %}
+                    <!-- include post detail -->
+                    {% include 'posts/_post.html' %}
+                    <!-- end for loop -->
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    </div>
+    </div>
+{% endblock group_content %}
+<!-- end of group_content block -->

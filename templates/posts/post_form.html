@@ -1,0 +1,27 @@
+<!-- extend post base -->
+{% extends "posts/post_base.html" %}
+
+{% load static %}
+
+<!-- load bootstrap for form styling -->
+{% load bootstrap4 %}
+
+<!-- post_content block begins -->
+{% block post_content %}
+    <div id="page-content" class="container bg-light">
+        <div id="page-logo">
+            <img src="{% static 'images/juntos-name-logo.png' %}" alt="page logo" height="65"/>
+        </div>
+        <h1 class="animate__animated animate__fadeInLeft">Create Post</h1>
+
+        <form
+                method="POST"
+                enctype="multipart/form-data"
+                action="{% url 'posts:create' %}"
+                id="post-form"
+        >
+            {% csrf_token %} {% bootstrap_form form %}
+            <input type="submit" value="Post" class="btn btn-primary btn-large"/>
+        </form>
+    </div>
+{% endblock %}

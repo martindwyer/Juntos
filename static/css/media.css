@@ -1,0 +1,34 @@
+@media (min-width: 0px) and (max-width: 576px) {
+    #jumbo-network {
+        display: none;
+    }
+
+
+}
+
+@media (min-width: 0px) and (max-width: 1200px) {
+    .container {
+        width: 100vw !important;
+        max-width: 100vw !important;
+    }
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 1200px) {
+
+    .container-fluid {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .container {
+        width: 100vw !important;
+    }
+
+    #page-content {
+        width: 100vw !important;
+
+    }
+}

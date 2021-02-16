@@ -1,0 +1,80 @@
+<!-- extends the posts base -->
+{% extends "posts/post_base.html" %}
+
+{% load static %}
+
+<!-- prepost block begins here -->
+{% block prepost %}
+    <div id="page-content" class="container bg-light">
+    <div class="row">
+    <div id="left-stuff" class="col-md-4">
+        <div id="sidebar-logo">
+            <img src="{% static 'images/juntos-name-logo.png' %}" alt="page logo"/>
+            <h6>Building Community Together</h6>
+        </div>
+
+        {% if request.user.is_authenticated %}
+            <div class="card group-card">
+                <h4>Active User</h4>
+                {% if request.user.profile_pic %}
+                    <img class="profile-picture" src="/media/{{ request.user.profile_pic }}" alt="profile-pic"/>
+                {% endif %}
+
+                <h6>@{{ request.user.username }}</h6>
+                <a class="btn btn-post" href="{% url 'posts:create' %}">Add Post&nbsp;&nbsp;<i
+                        class="fas fa-plus fa-xl"></i></a>
+                <hr>
+                <h5>Your Groups</h5>
+                <ul class="your-groups">
+                    {% for member_group in user_groups %}
+                        <li><a href="{% url 'groups:single' slug=member_group.slug %}">{{ member_group.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <div>
+                <br/>
+                <hr/>
+                <h4>Listing all posts</h4>
+
+                <h6>From newest to oldest</h6>
+                <hr/>
+
+                <br/>
+            </div>
+
+        {% endif %}
+        <div class="card group-card">
+            <div class="content">
+                <hr/>
+                <h5>All Groups</h5>
+                <ul class="all-groups">
+                    {% for group in all_groups %}
+                        <li><a href="{% url 'groups:single' slug=group.slug %}">{{ group.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                <hr/>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<!-- end of prepost block -->
+
+<!-- beginning of post_content block -->
+{% block post_content %}
+    <div class="col-md-8">
+        <br/>
+        <h3>All Posts</h3>
+        <!-- loop for each user post -->
+        {% for post in post_list %}
+            <div class="card">
+                <!-- include template for each post -->
+                {% include "posts/_post.html" %}
+                <!-- end of loop -->
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+{% endblock %}
+<!-- end of post_content block -->

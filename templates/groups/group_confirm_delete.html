@@ -1,0 +1,23 @@
+<!-- extends group base -->
+{% extends "groups/group_base.html" %}
+
+{% load static %}
+
+<!-- loads form to group content -->
+{% block group_content %}
+    <div id="page-content" class="container">
+        <div id="page-logo">
+            <img src="{% static 'images/juntos-name-logo.png' %}" alt="page logo" height="65"/>
+        </div>
+        <h3>Are you sure you want to delete this group?</h3>
+        <hr>
+        <br>
+        <h5>Group Name:&nbsp;&nbsp; {{ group.name }}</h5>
+        <form class="confirm-delete-form" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Confirm" class="btn"/>
+            <a class="btn" href="{% url 'groups:single'  slug=group.slug %}">Cancel</a>
+        </form>
+    </div>
+
+{% endblock %}

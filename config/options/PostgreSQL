@@ -1,0 +1,17 @@
+"""
+After a PostgreSQL db has been created, and PostgreSQL support has been added to the
+virtual environment, add the following to settings.py for a PostgreSQL db.
+
+pip install postgresql postgresql-contrib
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'mydatabaseuser',
+        'PASSWORD': 'mypassword',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}

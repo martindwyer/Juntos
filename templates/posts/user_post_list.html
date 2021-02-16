@@ -1,0 +1,42 @@
+<!-- extends post base -->
+{% extends "posts/post_base.html" %}
+
+{% load static %}
+
+<!-- prepost block begins -->
+{% block prepost %}
+    <div id="page-content" class="container bg-light">
+    <div class="row">
+    <div id="left-stuff" class="col-md-4">
+        <div id="sidebar-logo">
+            <img src="{% static 'images/juntos-name-logo.png' %}" alt="page logo"/>
+            <h6>Building Community Together</h6>
+        </div>
+        <br/>
+        <h4 class="animate__animated animate__fadeInTop">User Post List</h4>
+
+        <img class="profile-picture" src="/media/{{ post_user.profile_pic }}" alt="profile-pic"/>
+        <h6>@{{ post_user.username }}</h6>
+    </div>
+{% endblock prepost %}
+<!-- end of prepost block -->
+
+<!-- beginning of post_content -->
+{% block post_content %}
+
+    <div class="col-md-8">
+        <br/>
+        <h3>Posts</h3>
+        <!-- iteration for all posts -->
+        {% for post in post_list %}
+            <div class="card">
+                <!-- include post layout template -->
+                {% include "posts/_post.html" %}
+                <!-- end of loop-->
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+{% endblock %}
+<!-- end of post_content block -->

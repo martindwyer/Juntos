@@ -1,0 +1,22 @@
+<!-- extends group base -->
+{% extends 'groups/group_base.html' %}
+
+{% load static %}
+
+<!-- loads bootstrap for styling form -->
+{% load bootstrap4 %}
+
+<!-- loads into group_content block -->
+{% block group_content %}
+    <div id="page-content" class="container bg-light">
+        <div id="page-logo">
+            <img src="{% static 'images/juntos-name-logo.png' %}" alt="page logo" height="65"/>
+        </div>
+        <h2 class="animate__animated animate__bounceInRight">Update Group</h2>
+        <form method="post">
+            {% csrf_token %} {% bootstrap_form form %}
+
+            <input type="submit" class="btn btn-primary btn-large" value="Submit"/>
+        </form>
+    </div>
+{% endblock group_content %}

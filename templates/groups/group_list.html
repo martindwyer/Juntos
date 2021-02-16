@@ -1,0 +1,90 @@
+<!-- extends the group base -->
+{% extends 'groups/group_base.html' %}
+
+{% load static %}
+
+<!-- pregroup block content below -->
+{% block pregroup %}
+    <div id="page-content" class="container bg-light">
+    <div class="row">
+    <div id="left-stuff" class="col-md-4">
+        <div id="sidebar-logo">
+            <img src="{% static 'images/juntos-name-logo.png' %}" alt="page logo"/>
+            <h6>Building Community Together</h6><br/><br/>
+        </div>
+        {% if user.is_authenticated %}
+            <h2>Welcome Back!</h2>
+
+            <img
+                    alt="profile-pic"
+                    class="profile-picture"
+                    src="/media/{{ user.profile_pic }}"
+            />
+            <h6>
+                <a href="{% url 'posts:for_user' username=user.username %}">@{{ user.username }}</a>
+            </h6>
+        {% else %}
+            <br/>
+            <hr/>
+            <h2>Groups</h2>
+            <h5>A listing of our groups</h5>
+            <hr/>
+
+        {% endif %} {% if user.is_authenticated %}
+        <a href="{% url 'groups:create' %}" class="btn btn-create">
+            <i class="fas fa-plus-circle"></i>
+            Create Group
+        </a>
+    {% endif %}
+        <div id="click-any-group">
+            <p>Click any group name to view posts.</p>
+        </div>
+    </div>
+{% endblock %}
+<!-- end of pregroup block content -->
+
+<!-- group_content block content below -->
+{% block group_content %}
+    <div class="col-md-8">
+        <h2 class="page-heading">Group List</h2>
+
+        <!-- beginning of group listing -->
+        {% for group in object_list %}
+            <div class="card group-listing">
+                <a href="{% url 'groups:single' slug=group.slug %}">
+                    <div class="group-name">{{ group.name }}</div>
+                </a>
+                {{ group.description_html|safe }}
+
+                <!-- insert group picture if one exists -->
+                {% if group.group_picture %}
+
+                    <img
+                            class="group-pic-detail-page"
+                            src="/media/{{ group.group_picture }}"
+                            alt="group pic"
+                    />
+
+                {% endif %}
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="member-count">
+                            {{ group.members.count }}&nbsp; member
+                            {{ group.members.count|pluralize }}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="post-count">
+                            <span>{{ group.posts.count }}&nbsp;</span>
+                            <span>post{{ group.posts.count|pluralize }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+    </div>
+{% endblock %}
+<!-- end group_content block -->

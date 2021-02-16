@@ -1,0 +1,17 @@
+"""
+After a MySQL db has been created, and MySQL support has been added to the
+virtual environment, add the following to settings.py for a MySQL db.
+
+pip install mysqlclient
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': <Database_name>,
+        'USER':'root',
+        'PASSWORD':'',
+        'HOST':'localhost',
+        'PORT': '3306',
+    }
+}

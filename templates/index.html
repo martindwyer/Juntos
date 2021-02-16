@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% load static %}
+<!-- block content provided below -->
+
+{% block content %}
+
+    <div class="jumbotron bg-light">
+        <div class="row">
+            <div id="jumbo-intro" class="col-xl-6">
+                <div id="message-box" class="animate__animated animate__fadeInLeft">
+                    <div id="message-box-content">
+                        <div id="site-title">
+                            <img src="{% static 'images/juntos-name-logo.png' %}" alt="site-title"/>
+                        </div>
+                        <h5>Building community together.</h5>
+                        <h6>An open-source project.</h6>
+
+                        {% if user.is_authenticated %}
+                            <div class="home-button-box">
+                                <a href="{% url 'accounts:logout' %}" class="btn home-btn">Log out</a><br/>
+                            </div>
+                        {% else %}
+                            <div class="home-button-box">
+                                <a href="{% url 'accounts:login' %}" class="btn home-btn">Log in</a>
+                                <a href="{% url 'accounts:signup' %}" class="btn home-btn">Sign up</a>
+                            </div>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="jumbo-network" class="col-xl-6">
+                <img
+                        class="animate__animated animate__rotateInUpRight"
+                        id="landing-logo"
+                        src="{% static 'images/site-logo.png' %}"
+                        alt="landing-logo"
+                />
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
