@@ -50,7 +50,7 @@ nav {
     left: 0;
     right: 0;
     z-index: -1; /* needed to keep in the background */
-    background: url("../images/background_bw.jpg") top center;
+    background: url("../images/background.jpg") top center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
