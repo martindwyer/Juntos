@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.posts',
     'apps.groups',
+
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,4 @@ AUTH_USER_MODEL = 'accounts.User'
 
 LOGIN_REDIRECT_URL = 'posts:all'
 LOGOUT_REDIRECT_URL = 'home'
+
